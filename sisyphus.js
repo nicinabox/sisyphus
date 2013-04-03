@@ -185,9 +185,12 @@
 							}
 							var field = $( this );
 							var prefix = self.href + targetFormId + field.attr( "name" ) + self.options.customKeyPrefix;
-							if ( field.is( ":text" ) || field.is( "textarea" ) ) {
+							if ( (field.is( ":text" ) || field.is( "textarea" )) ) {
 								if ( ! self.options.timeout ) {
 									self.bindSaveDataImmediately( field, prefix );
+
+									// A plugin may trigger change on a field
+									self.bindSaveDataOnChange( field, prefix );
 								}
 							} else {
 								self.bindSaveDataOnChange( field, prefix );
